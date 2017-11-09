@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 Location = mongoose.model("location");
    
 function register(userName, coordinates, distance, callback) {
-  const distInKM = distance * 1000;
+  const distInMeter = distance * 1000;
   Location.findOneAndUpdate(
     { userName: userName },
     { $set: { loc: { coordinates: coordinates, type: "Point" }, created: new Date() } },
@@ -12,7 +12,7 @@ function register(userName, coordinates, distance, callback) {
       if (err) {
         return callback(error);
       }
-      _findFriends(user, distInKM, callback);
+      _findFriends(user, distInMeter, callback);
     });
 }
 
